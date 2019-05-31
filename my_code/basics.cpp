@@ -113,4 +113,5 @@ void pull_apart_string(std::string s) {
 	for (char c : s) {
 		cout << c << " ";
 	}
+	cout << endl;
 }
