@@ -12,14 +12,18 @@ void inc_with_pointer(int* iptr) {
 	++(*iptr);
 }
 
-
+// C++ already dereferences the reference 
 void inc_with_reference(int& n) {
 	++n;
 }
 
 
 Thing** create_array_of_things(int n) {
-    return nullptr;
+	Thing** array = new Thing*[n];
+	for (int i = 0; i < n; i++) { 
+		array[i] = new Thing(i);
+	}
+	return array;
 }
 
 void print_all_things(Thing** things, int n) {
@@ -39,7 +43,7 @@ void delete_all_things(Thing** things, int n) {
 	for(int i = 0; i < n; i++) { 
 		delete things[i];
 	}
-	// delete things [];
+	delete [] things;
 }
 
 
