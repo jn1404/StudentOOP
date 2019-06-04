@@ -4,14 +4,17 @@
 using namespace std;
 
 void inc_by_value(int n) {
+	++n;
 }
 
 
 void inc_with_pointer(int* iptr) {
+	++(*iptr);
 }
 
 
 void inc_with_reference(int& n) {
+	++n;
 }
 
 
@@ -20,12 +23,23 @@ Thing** create_array_of_things(int n) {
 }
 
 void print_all_things(Thing** things, int n) {
+	for (int i = 0; i < n; i++) { 
+		cout << things[i]->val << " ";
+	}
+	cout << endl;
 }
 
 void double_all_things(Thing** things, int n) {
+	for (int i = 0; i < n; i++) {
+		things[i]->val *= 2;
+	}
 }
 
 void delete_all_things(Thing** things, int n) {
+	for(int i = 0; i < n; i++) { 
+		delete things[i];
+	}
+	// delete things [];
 }
 
 
