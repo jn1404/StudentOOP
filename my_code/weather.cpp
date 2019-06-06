@@ -4,16 +4,6 @@
 
 using namespace std;
 
-/* 
- * output GPS coords
- * */
-std::ostream& operator<<(std::ostream& os, const GPS& gps) {
-	os << "latitude: " << gps.latitude << "; longitude: "
-		<< gps.longitude;
-	return os;
-}
-
-
 /*
  * A constructor for weather class.
  * */
@@ -33,7 +23,12 @@ void Weather::set_rating(int new_rating) {
 	rating = new_rating;
 }
 
+ostream& operator<<(ostream& os, const GPS& gps) {
+	os << "Latitude: " << gps.latitude << "; Longitude: " << gps.longitude;
+	return os;
+}
+
 ostream& operator<<(ostream& os, const Weather& w) { // operator<< here we are defining the operator
-	os << w.get_name() << ": rating " << w.get_rating() << " " << w.my_loc;
+	os << "Name: " << w.get_name() << "; Rating: " << w.get_rating() << "; " << w.my_loc;
 	return os; // to chain (cout << "Hello" << endl) -> (os << endl)
 }
