@@ -5,8 +5,27 @@
 #include "../my_code/date.h"
 
 using namespace std;
+/*
+ * Another way we can loop asking for a good file name. 
+string get_input_file() {
+	string filenm;
 
+	cout << "Input: ";
+	cin >> filenm;
+	return filenm;
+}
+
+Inside:
 void get_wreadings(Weather& w) {
+	ifstream rfile(get_input_file());
+	while (!rfile) {
+		cout << "Could not read." << endl;
+		rfile.open(get_input_file());
+	}
+}
+*/
+
+void get_wreadings(Weather& w) {	
 	string filenm;
 	cout << "Input the name of the new readings file: ";
 	cin >> filenm;
@@ -29,6 +48,10 @@ void get_wreadings(Weather& w) {
 }
 
 int main() {
+	WReading test_temps = WReading(Date(1, 1, 2019), 0, 50, 10);
+	double freezingF = test_temps.get_tempF();
+	assert(freezingF == 32.0);
+
     Weather irkutsk = Weather("Irkutsk", GPS(46.3, 67.2));
 
 	get_wreadings(irkutsk);

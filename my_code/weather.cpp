@@ -4,6 +4,23 @@
 
 using namespace std;
 
+const double F_TO_C = 5 / 9;
+const double C_TO_F = 9 / 5;
+
+/*
+ * TO DO 
+*/
+
+double WReading::get_tempF() {
+	return (temperature * C_TO_F) + 32;
+}
+
+double WReading::get_tempC() {
+	return (temperature - 32) * F_TO_C;
+}
+
+
+// END OF TO DO 
 /*
  * A constructor for weather class.
  * */

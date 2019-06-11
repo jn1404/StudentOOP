@@ -20,17 +20,19 @@ struct GPS {
 std::ostream& operator<<(std::ostream& os, const GPS& gps);
 
 class WReading {
-		friend std::ostream& operator<<(std::ostream& os, const WReading& wr);
-	public:
-		WReading(Date dt, double temp, double hum, double ws) : date(dt), temperature(temp),
-			humidity(hum), windspeed(ws)
-		{
-		}
-	private: 
-		Date date;
-		double temperature;
-		double humidity;
-		double windspeed;
+    friend std::ostream& operator<<(std::ostream& os, const WReading& wr);
+ public:
+	WReading(Date dt, double temp, double hum, double ws) : date(dt), temperature(temp),
+		humidity(hum), windspeed(ws)
+	{
+	}
+    double get_tempF();
+    double get_tempC();
+ private: 
+	Date date;
+	double temperature;
+	double humidity;
+	double windspeed;
 };
 
 
