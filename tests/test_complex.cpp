@@ -12,7 +12,7 @@ int main() {
     cout << "Input a complex number:\n";
     Complex c1{41.86, 52.34};
     // get a complex from stdin:
-    cin >> c1;
+   // cin >> c1;
    //  if(!cin)
    //  {
    //      cerr << "Bad input format\n";
