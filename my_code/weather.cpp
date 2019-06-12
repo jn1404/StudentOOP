@@ -22,13 +22,13 @@ Image::Image(const Image& img2) {
 
 // Destructor
 Image::~Image() {
-	if (image_buf != nullptr) delete image_buf;
+	if (image_buf != nullptr) delete [] image_buf; // delete array []
 }
 
 // Assignment operator
 Image& Image::operator=(const Image& img2) {
 	if (&img2 != this) { // in case: img2 = img2 
-		if (image_buf != nullptr) delete image_buf; // destructor
+		if (image_buf != nullptr) delete [] image_buf; // destructor
 		copy_fields(img2); // copy constructor
 	}
 	return *this;
