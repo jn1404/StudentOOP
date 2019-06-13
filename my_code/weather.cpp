@@ -22,7 +22,7 @@ Image::Image(const Image& img2) {
 
 // Destructor
 Image::~Image() {
-	if (image_buf != nullptr) delete [] image_buf; // delete array []
+	if (image_buf != nullptr) delete [] image_buf ; // delete array []
 }
 
 // Assignment operator

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <istream>
-#include <iomanip>
-#include <cmath>
+#include <iomanip> // for setprecision in test_complex
+#include <cmath> // for the abs() function
 #include "complex.h"
 
 using namespace std;
