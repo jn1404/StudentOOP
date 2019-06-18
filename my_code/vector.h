@@ -11,8 +11,8 @@ class my_vector {
 
         void push_back(int val);
         int size() const { return sz; }
-        int operator[](int i) const;
-        int& operator[](int i);
+        int operator[](int i) const; // returns a copy
+        int& operator[](int i); // returns a reference
     private:
         int* data;
         int sz;
@@ -20,3 +20,5 @@ class my_vector {
 };
 
 void print_my_vector(my_vector v);
+
+bool operator==(my_vector& v1, my_vector& v2);

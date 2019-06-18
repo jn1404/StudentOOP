@@ -45,6 +45,20 @@ my_vector& my_vector::operator=(const my_vector& v2) {
     return *this;
 }
 
+bool operator==(const my_vector& v1, const my_vector& v2) {
+    int v1_sz = v1.size();
+    int v2_sz = v2.size();
+    if (v1_sz == v2_sz) {
+        for (int i = 0; i < v1_sz; i++) {
+            if (v1[i] != v2[i])
+                return false;
+        }
+        return true;
+    } 
+    else 
+        return false;
+}
+
 
 void my_vector::push_back(int val) {
     if (sz == capacity) {
