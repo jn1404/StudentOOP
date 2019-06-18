@@ -1,6 +1,6 @@
 #include <cassert>
 #include <iostream>
-#include "../my_code/my_vector.h"
+#include "../my_code/vector.h"
 
 using namespace std;
 
