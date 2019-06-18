@@ -21,4 +21,4 @@ class my_vector {
 
 void print_my_vector(my_vector v);
 
-bool operator==(my_vector& v1, my_vector& v2);
+bool operator==(const my_vector& v1, const my_vector& v2);
