@@ -4,7 +4,7 @@
 
 using namespace std;
 
-const double F_TO_C = 5 / 9;
+// const double F_TO_C = 5 / 9;
 const double C_TO_F = 9 / 5;
 
 
@@ -49,7 +49,18 @@ int Image::image_sz() {
 }
 
 string Image::display(std::string s) {
-	return "Displaying image " + s;
+	cout << "Displaying Image " << s << endl;
+	return s;
+}
+
+string Gif::display(std::string s) {
+	cout << "Displaying GIF " << s << endl;
+	return s;
+}
+
+string Jpeg::display(std::string s) {
+	cout << "Displaying JPEG " << s << endl;
+	return s;
 }
 
 
@@ -109,8 +120,3 @@ ostream& operator<<(ostream& os, const WReading& wr) {
 		<< ": Windspeed: " << wr.windspeed;
 	return os;
 }
-
-
-
-
-

@@ -27,7 +27,7 @@ class Image {
      * Setting `display() = 0` here makes this an abstract
      * class that can't be implemented.
      * */
-    std::string display(std::string s);
+    virtual std::string display(std::string s);
     /*
      * If we don't want virtual method lookup, we
      * could just declare:
@@ -43,6 +43,35 @@ class Image {
     std::string filename;
     char* image_buf;
     void copy_fields(const Image& img2);
+};
+
+class Gif : public Image { // Inheritance
+ public:
+    Gif(int w, int h, std::string flnm, int cl=0) 
+        : Image(w, h, flnm), compress_level(cl) // Constructor
+    {}
+
+    std::string display(std::string s);
+
+ private:
+    int compress_level;
+};
+
+
+const int HIGH = 3;
+const int MEDIUM = 2;
+const int LOW = 1;
+
+class Jpeg : public Image { // Inheritance
+ public:
+    Jpeg(int w, int h, std::string flnm, int q=HIGH) 
+        : Image(w, h, flnm), quality(q) // Constructor
+    {}
+
+    std::string display(std::string s);
+
+ private:
+    int quality;
 };
 
 struct GPS {
