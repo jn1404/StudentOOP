@@ -48,21 +48,32 @@ int Image::image_sz() {
 	return width * height;
 }
 
-string Image::display(std::string s) {
-	cout << "Displaying Image " << s << endl;
-	return s;
+void Image::display() {
+	cout << "Displaying Image " << endl;
 }
 
-string Gif::display(std::string s) {
-	cout << "Displaying GIF " << s << endl;
-	return s;
+void Gif::display() {
+	cout << "Displaying GIF " << endl;
 }
 
-string Jpeg::display(std::string s) {
-	cout << "Displaying JPEG " << s << endl;
-	return s;
+void Jpeg::display() {
+	cout << "Displaying JPEG " << endl;
 }
 
+void Png::display() {
+	cout << "Displaying Png " << endl;
+}
+
+// delegation: to display each weather reading's image by calling each wreading's display_image function
+void Weather::display_images() {
+	for (WReading wr : wreadings) {
+		wr.display_image();
+	}
+}
+
+void WReading::display_image() {
+	image->display();
+}
 
 /*
  * TO DO 

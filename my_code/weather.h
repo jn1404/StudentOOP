@@ -27,7 +27,7 @@ class Image {
      * Setting `display() = 0` here makes this an abstract
      * class that can't be implemented.
      * */
-    virtual std::string display(std::string s);
+    virtual void display();
     /*
      * If we don't want virtual method lookup, we
      * could just declare:
@@ -51,10 +51,21 @@ class Gif : public Image { // Inheritance
         : Image(w, h, flnm), compress_level(cl) // Constructor
     {}
 
-    std::string display(std::string s);
+    void display();
 
  private:
     int compress_level;
+};
+
+class Png : public Image { 
+ public:
+    Png(int w, int h, std::string flnm, int sth=0)
+        : Image(w, h, flnm), something(sth)
+    {}
+
+    void display();
+ private:
+    int something;
 };
 
 
@@ -68,7 +79,7 @@ class Jpeg : public Image { // Inheritance
         : Image(w, h, flnm), quality(q) // Constructor
     {}
 
-    std::string display(std::string s);
+    void display();
 
  private:
     int quality;
@@ -86,10 +97,11 @@ std::ostream& operator<<(std::ostream& os, const GPS& gps);
 class WReading {
     friend std::ostream& operator<<(std::ostream& os, const WReading& wr);
  public:
-	WReading(Date dt, double temp, double hum, double ws) :
-     date(dt), temperature(temp), humidity(hum), windspeed(ws)
+	WReading(Date dt, double temp, double hum, double ws, Image* image) :
+     date(dt), temperature(temp), humidity(hum), windspeed(ws), image(image)
 	{
 	}
+    void display_image();
     double get_tempF();
     double get_tempC() { return temperature; }
 
@@ -98,6 +110,7 @@ class WReading {
 	double temperature;
 	double humidity;
 	double windspeed;
+    Image* image;
 };
 
 
@@ -109,6 +122,7 @@ class Weather {
     int get_rating() const;
     void set_rating(int new_rating);
     void add_reading(WReading wr);
+    void display_images();
  private:
 	std::vector<WReading> wreadings;
     std::string station_nm;
