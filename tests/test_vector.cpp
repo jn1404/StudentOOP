@@ -4,13 +4,13 @@
 
 using namespace std;
 
-int copy_vector(my_vector v) {
-    my_vector local_v = v;
+int copy_vector(MyVec v) {
+    MyVec local_v = v;
     return local_v.size();
 }
 
 int main() {
-    my_vector v = my_vector();
+    MyVec v = MyVec();
     for (int i = 0; i < 200; i++) {
         v.push_back(i);
         copy_vector(v);
@@ -20,17 +20,26 @@ int main() {
         v[i] *= 2;
     }
     assert(v[199] == 398);
-    my_vector v3;
+    MyVec v3;
     for (int i = 9; i < 100; i += 9) {
         v3.push_back(i);
     }
     assert(v3[1] == 18);
 
-    my_vector v2 = v;
-    print_my_vector(v2);
+    MyVec v2 = v;
+    print_vector(v2);
     assert(v2 == v);
 
     v2 = v3;
-    print_my_vector(v2);
+    print_vector(v2);
     assert(v2 == v3);
+ 
+    for (int i : v3) {
+        assert((i % 9) == 0);
+    }
+
+    MyVec v4 = MyVec(10, 20);
+    for (int i : v4) {
+        assert(i == 20);
+    }
 }

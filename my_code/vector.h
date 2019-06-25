@@ -1,24 +1,59 @@
-const int DEF_CAPACITY = 10;
 
-class my_vector {
+const int DEF_CAPACITY = 10;
+const int CAPACITY_MULT = 2;
+
+class MyVec {
     public:
-        my_vector();
+        class Iterator {
+        /*
+         * This class supports ranged for loops.
+         * It includes:
+         * Iterator(int*)
+         * operator++
+         * operator*
+         * operator!=
+         * */
+            friend bool operator!=(Iterator& rhs, Iterator& lhs) {
+                return rhs.iptr != lhs.iptr;
+            }
+
+        public:
+            Iterator(int* ip) : iptr(ip) {}
+
+            Iterator& operator++() {
+                iptr++;
+                return *this;
+            }
+
+            int operator*() { return *iptr; }
+
+        private:
+            int* iptr;
+    };
+
+        MyVec();
+        MyVec(int sz, int val=0);
 
         // copy control:
-        my_vector(const my_vector& v2);
-        ~my_vector();
-        my_vector& operator=(const my_vector& v2);
+        MyVec(const MyVec& v2);
+        ~MyVec();
+        MyVec& operator=(const MyVec& v2);
 
         void push_back(int val);
         int size() const { return sz; }
-        int operator[](int i) const; // returns a copy
-        int& operator[](int i); // returns a reference
+        int operator[](int i) const;
+        int& operator[](int i);
+        Iterator begin() const;
+        Iterator end() const;
+
     private:
+        void copy(const MyVec& v2);
         int* data;
         int sz;
         int capacity;
 };
 
-void print_my_vector(my_vector v);
 
-bool operator==(const my_vector& v1, const my_vector& v2);
+void print_vector(const MyVec& v);
+
+bool operator==(MyVec& v1, MyVec& v2);

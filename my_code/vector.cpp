@@ -3,53 +3,59 @@
 
 using namespace std;
 
-void print_my_vector(my_vector v) {
-    for (int i = 0; i < v.size(); i++) {
-        cout << v[i] << " ";
-    }
+void print_vector(const MyVec& v) {
+    for (int i : v) cout << i << " ";
     cout << endl;
 }
 
 
-my_vector::my_vector() {
-    sz = 0;
+MyVec::MyVec() : sz(0) {
     capacity = DEF_CAPACITY;
     data = new int[DEF_CAPACITY];
 }
 
-my_vector::my_vector(const my_vector& v2) {
-    capacity = v2.capacity;
-    sz = v2.size();
-    data = new int[capacity];
-    // copy over existing data
-    for (int i = 0; i < size(); i++) {
-        data[i] = v2.data[i];
-    }
+
+MyVec::MyVec(int sz, int val) : sz{sz} {
+    capacity = sz;
+    data = new int[sz];
+    for (int i = 0; i < sz; i++)
+        data[i] = val;
 }
 
-my_vector::~my_vector() {
-    delete[] data;
+
+MyVec::MyVec(const MyVec& v2) {
+    copy(v2);
 }
 
-my_vector& my_vector::operator=(const my_vector& v2) {
-    if (&v2 != this) {
-        delete[] data;
-        capacity = v2.capacity;
-        sz = v2.size();
-        data = new int[capacity];
-        // copy over existing data
-        for (int i = 0; i < size(); i++) {
-            data[i] = v2.data[i];
-        }
+MyVec::~MyVec() {
+    if (data != nullptr) delete [] data;
+}
+
+MyVec& MyVec::operator=(const MyVec& v2) {
+    if (this != &v2) {
+        delete [] data;
+        copy(v2);
     }
     return *this;
 }
 
-bool operator==(const my_vector& v1, const my_vector& v2) {
-    int v1_sz = v1.size();
-    int v2_sz = v2.size();
-    if (v1_sz == v2_sz) {
-        for (int i = 0; i < v1_sz; i++) {
+
+MyVec::Iterator MyVec::begin() const {
+    return MyVec::Iterator(data);
+}
+
+MyVec::Iterator MyVec::end() const {
+    return MyVec::Iterator(data + sz);
+}
+
+
+/*
+ * == is true when every element of the vectors are the same in
+ * the same order. (Thus they must be the same size.)
+ * */
+bool operator==(MyVec& v1, MyVec& v2) {
+    if (v1.size() == v2.size()) {
+        for (int i = 0; i < v1.size(); i++) {
             if (v1[i] != v2[i])
                 return false;
         }
@@ -59,29 +65,45 @@ bool operator==(const my_vector& v1, const my_vector& v2) {
         return false;
 }
 
-
-void my_vector::push_back(int val) {
-    if (sz == capacity) {
+/*
+ * Puts an element at the back of a vector.
+ * */
+void MyVec::push_back(int val) {
+    sz++;
+    if (sz > capacity) {
         cout << "Increasing capacity\n";
-        // get new array of capacity * 2
-        capacity *= 2;
-        int* new_data = new int[capacity];
-        // copy over existing data
-        for (int i = 0; i < size(); i++) {
-            new_data[i] = data[i];
+        int* old_data = data;
+        data = new int[capacity * CAPACITY_MULT];
+        for (int i = 0; i < sz; i++) {
+            data[i] = old_data[i];
         }
-        // delete old array
-        delete[] data;
-        // set pointer to new array
-        data = new_data;
+        capacity *= CAPACITY_MULT;
+        delete [] old_data;
     }
-    data[sz++] = val;
+    data[sz - 1] = val;
 }
 
-int my_vector::operator[](int i) const {
+/*
+ * this [] is for reading items from the MyVec:
+ * It returns the i-th element.
+ * */
+int MyVec::operator[](int i) const {
     return data[i];
 }
 
-int& my_vector::operator[](int i) {
+/*
+ * this [] allows write access to items in the MyVec:
+ * It returns a reference to the i-th element.
+ * */
+int& MyVec::operator[](int i) {
     return data[i];
+}
+
+void MyVec::copy(const MyVec& v2) {
+    sz = v2.sz;
+    capacity = v2.capacity;
+    data = new int[capacity];
+    for (int i = 0; i < sz; i++) {
+        data[i] = v2.data[i];
+    }
 }
